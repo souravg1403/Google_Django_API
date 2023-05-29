@@ -7,11 +7,12 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import os
+import json
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
-CLIENT_SECRETS_FILE = "credentials.json"
+CLIENT_SECRETS_FILE = 'E:/Django_proj/Django/Django_calender/google_calendar_integration-_django_rest_api/rest/credentials.json'
 
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection and REDIRECT URL.
@@ -19,7 +20,7 @@ SCOPES = ['https://www.googleapis.com/auth/calendar',
           'https://www.googleapis.com/auth/userinfo.email',
           'https://www.googleapis.com/auth/userinfo.profile',
           'openid']
-REDIRECT_URL = 'http://127.0.0.1:8000/rest/v1/calendar/redirect'
+REDIRECT_URL = 'https://746a-205-254-163-142.ngrok-free.app/rest/v1/calendar/redirect'
 API_SERVICE_NAME = 'calendar'
 API_VERSION = 'v3'
 
@@ -35,7 +36,7 @@ def google_calendar_init_view(request):
     # value doesn't match an authorized URI, you will get a 'redirect_uri_mismatch'
     # error.
     flow.redirect_uri = REDIRECT_URL
-
+    
     authorization_url, state = flow.authorization_url(
         # Enable offline access so that you can refresh an access token without
         # re-prompting the user for permission. Recommended for web server apps.
